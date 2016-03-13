@@ -9,6 +9,10 @@ from mptt.models import TreeForeignKey
 from mptt.managers import TreeManager
 
 
+class TreeCommentManager(CommentManager, TreeManager):
+    pass
+
+
 class ThreadedComment(MPTTModel, Comment):
     """
     Threaded comments with MPTT
@@ -20,7 +24,7 @@ class ThreadedComment(MPTTModel, Comment):
         null=True, blank=True,
         verbose_name=_('reply in comment'))
 
-    objects = CommentManager()
+    objects = TreeCommentManager()
     tree = TreeManager()
 
     class MPTTMeta:
